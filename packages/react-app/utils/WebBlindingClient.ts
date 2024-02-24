@@ -1,5 +1,6 @@
 import { randomBytes } from "crypto";
 import thresholdBls from "blind-threshold-bls";
+
 import { BlsBlindingClient } from "@celo/identity/lib/odis/bls-blinding-client";
 
 interface BlindedMessage {
@@ -18,7 +19,7 @@ export class WebBlsBlindingClient implements BlsBlindingClient {
     }
 
     async init() {
-        await thresholdBls.init("./blind_threshold_bls_bg.wasm");
+        thresholdBls.init("./blind_threshold_bls_bg.wasm");
     }
 
     async blindMessage(
@@ -32,7 +33,7 @@ export class WebBlsBlindingClient implements BlsBlindingClient {
             );
         }
         this.rawMessage = Buffer.from(base64PhoneNumber, "base64");
-        this.blindedValue = await thresholdBls.blind(this.rawMessage, userSeed);
+        this.blindedValue = thresholdBls.blind(this.rawMessage, userSeed);
         const blindedMessage = this.blindedValue.message;
         return Buffer.from(blindedMessage).toString("base64");
     }
@@ -43,12 +44,12 @@ export class WebBlsBlindingClient implements BlsBlindingClient {
         }
 
         const blindedSignature = Buffer.from(base64BlindSig, "base64");
-        const unblindMessage = await thresholdBls.unblind(
+        const unblindMessage = thresholdBls.unblind(
             blindedSignature,
             this.blindedValue.blindingFactor
         );
         // this throws on error
-        await thresholdBls.verify(
+        thresholdBls.verify(
             this.odisPubKey,
             this.rawMessage,
             unblindMessage

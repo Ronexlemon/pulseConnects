@@ -1,0 +1,69 @@
+dek
+lemon@lemonr:~/Documents$ celocli account:new
+This is not being stored anywhere. Save the mnemonic somewhere to use this account at a later point.
+
+mnemonic: net diagram physical parrot squirrel island danger wolf crowd dish system level chapter mosquito brick jar grass border hold inhale tail segment crop spin
+accountAddress: 0x57E9890358CDc7eda794C0287D458D41554Ba9a6
+privateKey: 1acbf2638007fc31f91abbd03c53dca7ee90f562610891d7626ebcb1c45d4ca2
+publicKey: 03663bbcaa737dbf538eb90cefc421513a93324334ecdbe72f5a053f6d50619e42
+address: 0x57E9890358CDc7eda794C0287D458D41554Ba9a6
+lemon@lemonr:~/Documents$ export ISSUER_DEK_PUBLIC_KEY=03663bbcaa737dbf538eb90cefc421513a93324334ecdbe72f5a053f6d50619e42
+lemon@lemonr:~/Documents$ celocli account:register-data-encryption-key --publicKey $ISSUER_DEK_PUBLIC_KEY --from $ISSUER_ADDRESS --privateKey $ISSUER_PRIVATE_KEY
+Failed to close the connection: Error: Flag --from expects a value
+lemon@lemonr:~/Documents$ celocli account:register-data-encryption-key --publicKey $ISSUER_DEK_PUBLIC_KEY --from $ISSUER_ADDRESS --privateKey $ISSUER_PRIVATE_KEY
+Failed to close the connection: Error: Flag --from expects a value
+ ›   Error: Flag --from expects a value
+lemon@lemonr:~/Documents$ celocli account:register-data-encryption-key --publicKey $ISSUER_DEK_PUBLIC_KEY  --from   $ISSUER_ADDRESS --privateKey $ISSUER_PRIVATE_KEY
+Failed to close the connection: Error: Flag --from expects a value
+ ›   Error: Flag --from expects a value
+lemon@lemonr:~/Documents$ celocli account:register-data-encryption-key --publicKey 03663bbcaa737dbf538eb90cefc421513a93324334ecdbe72f5a053f6d50619e42   --from  0x513887B39DB072d3725c36777B4000d7F84e3514   --privateKey  702e72b6f85b15f28e500b9aafca6bf1690463b411a54cbe4d5a47e8865549d3
+Running Checks:
+   ✘  0x513887B39DB072d3725c36777B4000d7F84e3514 is a registered Account 0x513887B39DB072d3725c36777B4000d7F84e3514 is not registered as an account. Try running account:register
+ ›   Error: Some checks didn't pass!
+lemon@lemonr:~/Documents$ celocli account:register-data-encryption-key --publicKey 03663bbcaa737dbf538eb90cefc421513a93324334ecdbe72f5a053f6d50619e42   --from  0x513887B39DB072d3725c36777B4000d7F84e3514   --privateKey  702e72b6f85b15f28e500b9aafca6bf1690463b411a54cbe4d5a47e8865549d3
+Running Checks:
+   ✔  0x513887B39DB072d3725c36777B4000d7F84e3514 is a registered Account 
+All checks passed
+SendTransaction: RegisterDataEncryptionKey
+txHash: 0x4a4b33b5cd935ae5f75f1fff48a282a3ab3a0d5afb56ebba7ece0db286587f67
+Sending Transaction: RegisterDataEncryptionKey... done
+lemon@lemonr:~/Documents$ 
+
+
+
+////ISSUER
+
+
+lemon@lemonr:~/Documents$ celocli account:new
+This is not being stored anywhere. Save the mnemonic somewhere to use this account at a later point.
+
+mnemonic: fatigue biology digital puzzle script rabbit bus company depth gold cherry flock symptom have exotic step okay village plug window soda child cannon verify
+accountAddress: 0x513887B39DB072d3725c36777B4000d7F84e3514
+privateKey: 702e72b6f85b15f28e500b9aafca6bf1690463b411a54cbe4d5a47e8865549d3
+publicKey: 02da0006efdc30c53cbeeba7fb981839202ed8eb34fac292237788748c88e646c3
+address: 0x513887B39DB072d3725c36777B4000d7F84e3514
+lemon@lemonr:~/Documents$ export ISSUER_ADDRESS=0x513887B39DB072d3725c36777B4000d7F84e3514
+lemon@lemonr:~/Documents$ export ISSUER_PRIVATE_KEY=702e72b6f85b15f28e500b9aafca6bf1690463b411a54cbe4d5a47e8865549d3
+lemon@lemonr:~/Documents$ celocli account:register --from $ISSUER_ADDRESS --privateKey $ISSUER_PRIVATE_KEY
+Running Checks:
+   ✔  0x513887B39DB072d3725c36777B4000d7F84e3514 is not a registered Account 
+All checks passed
+Sending Transaction: register... failed: insufficient funds for gas * price + value + gatewayFee
+    Error: insufficient funds for gas * price + value + gatewayFee
+lemon@lemonr:~/Documents$ celocli account:register --from $ISSUER_ADDRESS --privateKey $ISSUER_PRIVATE_KEY
+Running Checks:
+   ✔  0x513887B39DB072d3725c36777B4000d7F84e3514 is not a registered Account 
+All checks passed
+SendTransaction: register
+txHash: 0x7fe5127c2069e09d2581d934a031206efb2245eb7247522c26a628544e290e1d
+Sending Transaction: register... done
+lemon@lemonr:~/Documents$ 
+
+
+
+
+
+
+
+
+

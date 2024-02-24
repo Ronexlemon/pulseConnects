@@ -20,13 +20,11 @@ import {
 import { ethers, Wallet } from "ethers";
 import React, { useState, useEffect, useReducer } from "react";
 import { WebBlsBlindingClient } from "@/utils/WebBlindingClient";
- const ISSUER_PRIVATE_KEY = 
-   "0x726e53db4f0a79dfd63f58b19874896fce3748fcb80874665e0c147369c04a37";
+const ISSUER_PRIVATE_KEY = '702e72b6f85b15f28e500b9aafca6bf1690463b411a54cbe4d5a47e8865549d3' // "0xd17d36016332c2e29650e5daa539fda5219a4dcb86b2854ee885bffc2310d4c9"
+ const DEK_PUBLIC_KEY = '03663bbcaa737dbf538eb90cefc421513a93324334ecdbe72f5a053f6d50619e42' //"0x0254dc171ef5457582bcd6f477ec7dd60972a5bb64c5ecb95ce51fa0dd83aa07d1"
 
-const DEK_PUBLIC_KEY =
-    "0x026063780c81991c032fb4fa7485c6607b7542e048ef85d08516fe5c4482360e4b";
-const DEK_PRIVATE_KEY =
-    "0xc2bbdabb440141efed205497a41d5fb6114e0435fd541e368dc628a8e086bfee";
+    
+const DEK_PRIVATE_KEY = '1acbf2638007fc31f91abbd03c53dca7ee90f562610891d7626ebcb1c45d4ca2' //"0x6b687338da5cb9cd4be96f6a9bca7cc449eaf959c20071f066fb289f8eccf7e0"
 
 const INITIAL_STATE = {
     issuer: undefined,
@@ -94,7 +92,7 @@ function OdisProvider({ children }) {
                 issuer
             );
             let stableTokenContract = new ethers.Contract(
-                ALFAJORES_CUSD_ADDRESS,
+                Alfajores_cusd,
                 STABLE_TOKEN_CONTRACT.abi,
                 issuer
             );

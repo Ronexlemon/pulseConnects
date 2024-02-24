@@ -11,6 +11,8 @@ import { IdentifierPrefix } from "@celo/identity/lib/odis/identifier";
 import { toast } from "react-hot-toast";
 import NavBar from "../components/NavBar"
 import Header from "@/components/HeaderRK";
+//import { OdisUtils } from "@celo/identity";
+import { AuthSigner } from "@celo/identity/lib/odis/query";
 
 let ONE_CENT_CUSD = ethers.utils.parseEther("0.01");
 const NOW_TIMESTAMP = Math.floor(new Date().getTime() / 1000);
@@ -66,7 +68,7 @@ export default function RegistrationPage({}) {
                         odisPaymentsContract.address,
                         ONE_CENT_CUSD
                     )
-                    .sendAndWaitForReceipt();
+                    // .sendAndWaitForReceipt();
                 console.log("approval status", approvalTxReceipt.status);
                 enoughAllowance = approvalTxReceipt.status;
             } else {
@@ -75,9 +77,11 @@ export default function RegistrationPage({}) {
 
             // increase quota
             if (enoughAllowance) {
+                
                 const odisPayment = await odisPaymentsContract
                     .payInCUSD(issuer.address, ONE_CENT_CUSD)
-                    .sendAndWaitForReceipt();
+                    // .sendAndWaitForReceipt();
+                    await odisPayment.wait();
                 console.log("odis payment tx status:", odisPayment.status);
                 console.log(
                     "odis payment tx hash:",
@@ -97,7 +101,7 @@ export default function RegistrationPage({}) {
                 serviceContext.odisPubKey
             );
 
-            await blindingClient.init();
+             await blindingClient.init();
 
             const { obfuscatedIdentifier } =
                 await OdisUtils.Identifier.getObfuscatedIdentifier(
@@ -108,8 +112,18 @@ export default function RegistrationPage({}) {
                     serviceContext,
                     undefined,
                     undefined,
+                    
                     blindingClient
                 );
+            //const userPlaintextIdentifier = "+12345678910";
+            // const { obfuscatedIdentifier } =
+    // await OdisUtils.Identifier.getObfuscatedIdentifier(
+    //     userPlaintextIdentifier,
+    //     OdisUtils.Identifier.IdentifierPrefix.PHONE_NUMBER,
+    //     issuer.address,
+    //     authSigner,
+    //     serviceContext
+    // );
 
             return obfuscatedIdentifier;
         } catch (e) {
